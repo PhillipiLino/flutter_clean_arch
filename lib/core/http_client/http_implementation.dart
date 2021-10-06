@@ -2,7 +2,9 @@ import 'package:nasa_clean_arch/core/http_client/http_client.dart';
 import 'package:http/http.dart' as http;
 
 class HttpImplementation implements HttpClient {
-  final client = http.Client();
+  final http.Client client;
+
+  HttpImplementation(this.client);
 
   @override
   Future<HttpResponse> get(String url) async {

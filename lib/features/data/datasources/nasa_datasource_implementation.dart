@@ -11,8 +11,12 @@ import 'space_media_datasource.dart';
 
 class NasaDatasourceImplementation implements ISpaceMediaDatasource {
   final HttpClient client;
+  final DateToStringConverter converter;
 
-  NasaDatasourceImplementation(this.client);
+  NasaDatasourceImplementation({
+    required this.converter,
+    required this.client,
+  });
 
   @override
   Future<SpaceMediaModel> getSpaceMediaFromDate(DateTime date) async {

@@ -2,24 +2,28 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:nasa_clean_arch/core/http_client/http_client.dart';
 import 'package:nasa_clean_arch/core/usecase/errors/exceptions.dart';
+import 'package:nasa_clean_arch/core/utils/converters/date_converter.dart';
 import 'package:nasa_clean_arch/features/data/datasources/space_media_datasource.dart';
 import 'package:nasa_clean_arch/features/data/datasources/nasa_datasource_implementation.dart';
 import 'package:nasa_clean_arch/features/data/models/space_media_model.dart';
 
-import '../../../mocks/space_media_mock.dart';
+import '../../mocks/date_mock.dart';
+import '../../mocks/space_media_mock.dart';
 
 class MockHttpClient extends Mock implements HttpClient {}
 
 main() {
+  late DateToStringConverter converter;
   late ISpaceMediaDatasource datasource;
   late HttpClient client;
 
   setUp(() {
     client = MockHttpClient();
-    datasource = NasaDatasourceImplementation(client);
+    converter = DateToStringConverter();
+    datasource =
+        NasaDatasourceImplementation(converter: converter, client: client);
   });
 
-  final tDate = DateTime(2021, 02, 02);
   const urlExpected =
       'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=2021-02-02';
 

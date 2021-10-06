@@ -4,7 +4,7 @@ class SpaceMediaEntity extends Equatable {
   final String description;
   final String mediaType;
   final String title;
-  final String mediaUrl;
+  final String? mediaUrl;
 
   const SpaceMediaEntity({
     required this.description,
